@@ -25,29 +25,44 @@ float div(float num1,float num2){
 
 
 int main(){
-    float num1,num2,res;
-    char ops;
-    printf("What you operations you want to do with 2 numbers:");
-    scanf("%f %c %f",&num1,&ops,&num2);
-    if (ops == '+'){
-        res=addn(num1,num2);
+    float num[200];
+    float res;
+    char ops[200]; 
+    int i=0;
+    printf("What calculations you want to do & end with = sign (eg 5+3-2/4=):");
+    scanf("%f %c",&num[i],&ops[i]);
+    i++;
+    while (1){
+        scanf("%f %c",&num[i],&ops[i]);/*This takes the multiple input from the user and stores in the arrays*/
+        if (ops[i]=='='){
+            break;
+        }
+        i++;
     }
-    else if (ops == '-'){
-        res=subs(num1,num2);
-    }
-    else if (ops == '*'){
-        res=mult(num1,num2);
-    }
-    else if (ops == '/'){
-        res=div(num1,num2);
-        if (num2==0){
+    for (int j=0;j<i;j++){
+        if (ops[j] == '+'){
+            res=addn(num[j],num[j+1]);
+        }
+        else if (ops[j] == '-'){
+            res=subs(num[j],num[j+1]);
+        }
+        else if (ops[j] == '*'){
+            res=mult(num[j],num[j+1]);
+        }
+        else if (ops[j] == '/'){
+            res=div(num[j],num[j+1]);
+            if (num[j+1]==0){
+                return 0;
+            }
+        }
+        else{
+            printf ("You used an invalid operator.");
             return 0;
         }
+        num[j+1]=res;
     }
-    else{
-        printf ("You used an invalid operator.");
-        return 0;
-    }
-    printf ("%.2f",res);
-return 0;
+
+    printf(" %.2f \n",num[i]);
+    printf ("END");
+    return 0;
 }
