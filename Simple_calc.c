@@ -23,7 +23,7 @@ float divide(float num1,float num2){
     }
 }
 
-
+//Shifting of Solved numbers
 void shift_elements(float num[],char ops[],int start,int end){
     for (int k = start; k < end; k++) {
         num[k] = num[k + 1];
@@ -31,36 +31,9 @@ void shift_elements(float num[],char ops[],int start,int end){
     }
 }
 
-
-int main(){
-    float num[200];
-    float res=0;
-    char ops[200];
-    int i=0;
-    printf("Write your Equation in form of (2+3-4=) No negative numbers:");
-    scanf("%f %c",&num[i],&ops[i]);
-    i++;
-
-    //Reading the Expression
-    while (1){
-        scanf("%f %c",&num[i],&ops[i]);
-        if (ops[i]=='='){
-            break;
-        }
-        i++;
-    }
-
-    int Total_elements=i;
-    
-    //Printing the same expression
-    printf("Expression:");
-    for (int j=0; j<=i ; j++){
-        printf("%.2f %c ",num[j],ops[j]);
-    }
-    printf("\n");
-
-    //Operation Precedence
-
+void dmas(float num[],char ops[],int i){
+     //Operation Precedence
+    int res=0;
     //Division
     for (int j=0;j<i;j++){
         if (ops[j] == '/'){
@@ -105,6 +78,43 @@ int main(){
         }
     }
 
+    if (i){
+        dmas(num,ops,i);
+    }
+}
+
+
+
+
+int main(){
+    float num[200];
+    float res=0;
+    char ops[200];
+    int i=0;
+    printf("Write your Equation in form of (2+3-4=) No negative numbers:");
+    scanf("%f %c",&num[i],&ops[i]);
+    i++;
+
+    //Reading the Expression
+    while (1){
+        scanf("%f %c",&num[i],&ops[i]);
+        if (ops[i]=='='){
+            break;
+        }
+        i++;
+    }
+
+    int Total_elements=i;
+    
+    //Printing the same expression
+    printf("Expression:");
+    for (int j=0; j<=i ; j++){
+        printf("%.2f %c ",num[j],ops[j]);
+    }
+    printf("\n");
+
+    dmas(num,ops,i);
+
 
     //for (int j=0;j<= Total_elements;j++){
     //    printf(" %f %d \n",num[j],j);
@@ -115,4 +125,3 @@ int main(){
     printf ("END\n");
     return 0;
 }
-
